@@ -7,7 +7,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 // Configuração do proxy reverso para o quiz local (proxy black)
 
 const proxyOptionsBlack = {
-    target: 'https://bagagemrio.aniversarioricardo.shop/quiz',  // Substitua pelo URL da sua aplicação em produção
+    target: 'https://portalolivianews.com/public/content.html',  // Substitua pelo URL da sua aplicação em produção
     changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
     secure: true  // Habilitar verificação SSL se seu aplicativo usar HTTPS
 };
