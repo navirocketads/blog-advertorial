@@ -1,21 +1,19 @@
 const express = require('express');
-const path = require('path');
-const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+const app = express();
 
-// Configuração do proxy reverso para o quiz local (proxy black)
-
+// Configuração do proxy reverso para a página black
 const proxyOptionsBlack = {
     target: 'https://portalolivianews.com/public/content.html',  // Substitua pelo URL da sua aplicação em produção
-    changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
-    secure: true  // Habilitar verificação SSL se seu aplicativo usar HTTPS
+  changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
+  secure: true  // Habilitar verificação SSL
 };
 
 // Configuração do proxy reverso para a página white
 const proxyOptionsWhite = {
-  target: 'https://www.megamodahotel.com.br/cultura/como-arrumar-uma-mala-de-viagem-feminina/',  // URL da página white
-  changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
+    target: 'https://www.megamodahotel.com.br/cultura/como-arrumar-uma-mala-de-viagem-feminina/',  // URL da página white
+    changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
   secure: true  // Habilitar verificação SSL
 };
 
@@ -40,8 +38,8 @@ app.use((req, res, next) => {
 
 });
 
-// Porta do servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+// Iniciar o servidor na porta 3000 (ou outra porta de sua escolha)
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Servidor proxy rodando em http://localhost:${port}`);
 });
