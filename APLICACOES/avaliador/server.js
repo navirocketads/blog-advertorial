@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
-// Define o diretório de arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Configuração do proxy reverso para o quiz local (proxy black)
