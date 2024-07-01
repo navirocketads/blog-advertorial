@@ -5,7 +5,7 @@ const app = express();
 
 // Configuração do proxy reverso para a página black
 const proxyOptionsBlack = {
-    target: 'https://cupom.aniversarionshoes.shop/content/content.html',  // Substitua pelo URL da sua aplicação em produção
+    target: 'https://portalolivianews.com',  // Substitua pelo URL da sua aplicação em produção
   changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
   secure: true  // Habilitar verificação SSL
 };
