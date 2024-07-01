@@ -9,9 +9,6 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const proxyOptionsBlack = {
     target: 'https://bagagemrio.aniversarioricardo.shop/quiz',  // Substitua pelo URL da sua aplicação em produção
     changeOrigin: true,  // Mudar o cabeçalho Host para o host do destino
-    pathRewrite: {
-        '^/quiz': '/index.html'  // Redireciona requisições para /quiz para /index.html dentro de /public
-    },
     secure: true  // Habilitar verificação SSL se seu aplicativo usar HTTPS
 };
 
