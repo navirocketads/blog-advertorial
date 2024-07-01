@@ -4,6 +4,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
+// Define o diretório de arquivos estáticos (public)
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // Configuração do proxy reverso para a página white (externa)
 const proxyOptionsWhite = {
