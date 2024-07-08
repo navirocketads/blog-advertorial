@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+body {
+  background-color: #F5DEB3; /* Cor de fundo areia */
+  margin: 0; /* Remover margens padrão do corpo */
+  padding: 0; /* Remover preenchimento padrão do corpo */
+  font-family: 'Arial', sans-serif; /* Exemplo de fonte padrão */
+}
+
+.app-container {
+  background-color: #F5DEB3; /* Cor de fundo areia */
+  min-height: 100vh; /* Altura mínima da tela inteira */
+  padding: 20px; /* Espaçamento interno */
+  display: flex;
+  justify-content: center; /* Centralizar conteúdo horizontalmente */
+  align-items: center; /* Centralizar conteúdo verticalmente */
+}
+
+.question-container {
+  background-color: #f0f0f0; /* Cor de fundo cinza claro para a área do quiz */
+  padding: 20px; /* Espaçamento interno */
+  border-radius: 10px; /* Borda arredondada */
+  max-width: 800px; /* Largura máxima do quiz */
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

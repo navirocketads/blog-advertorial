@@ -1,0 +1,70 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="icon" href="favicon.ico" type="image/x-icon">
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+      <title>Avaliação Farm Rio</title>
+    </head>
+    <body>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <div id="root"></div>
+      
+
+      <!--
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
+
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
+
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+      -->
+
+      <script src="js/hideAllExcept.js"></script>
+      <script src="js/selectedCard.js"></script>
+      <script src="js/selectedResponse.js"></script>
+      <script src="js/buttonCheck.js"></script>
+      <script src="js/popup.js"></script>
+      <script src="js/sendResponse.js"></script>
+      <script>
+        (document).ready(function () {
+          let data = new Date();
+    
+          var date = data.getDate();
+          var month = [
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
+          ][data.getMonth()];
+          var year = data.getFullYear();
+    
+          $("#todayDate").html(`${date} de ${month} de ${year}**`);
+        });
+      </script>
+      <script type="text/javascript" src="js/crypto-js.min.js"></script>
+    
+      <script>
+        var popup = document.getElementById("popup");
+    
+        document.addEventListener("DOMContentLoaded", function () {
+          popup.click();
+        });
+        </script>
+
+    </body>
+  </html>
