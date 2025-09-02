@@ -1,0 +1,8 @@
+{
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+      { "source": "/pages/(.*)\\.html", "destination": "/pages/$1", "permanent": false }
+    ]
+  }
+  
